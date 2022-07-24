@@ -39,6 +39,11 @@
 			<artifactId>amqp-client</artifactId>
 			<version>5.7.2</version>
 		</dependency>
+<!--		添加测试相关依赖-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
