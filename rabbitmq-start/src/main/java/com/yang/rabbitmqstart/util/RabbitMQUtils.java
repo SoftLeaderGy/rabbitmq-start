@@ -12,19 +12,28 @@ import com.rabbitmq.client.ConnectionFactory;
 public class RabbitMQUtils {
 
     /**
+     * 实现ConnectionFactory 对象的单例模式，在类加载的时候生成ConnectionFactory对象
+     * 并且将对应的连接信息设置好
+     */
+    private static ConnectionFactory connectionFactory;
+
+    static {
+        // 因为ConnectionFactory 属于重量级资源，在整个项目中出现一个对象就够了（实现ConnectionFactory 对象的单例）
+        connectionFactory = new ConnectionFactory();
+        connectionFactory.setHost("localhost");
+        connectionFactory.setPort(5672);
+        connectionFactory.setVirtualHost("/msg");
+        connectionFactory.setUsername("msg");
+        connectionFactory.setPassword("123");
+    }
+
+    /**
      * 获取MQ连接的工具方法
      * @return
      */
     public static Connection getConnection(){
         try {
-            ConnectionFactory connectionFactory = new ConnectionFactory();
-            connectionFactory.setHost("localhost");
-            connectionFactory.setPort(5672);
-            connectionFactory.setVirtualHost("/msg");
-            connectionFactory.setUsername("msg");
-            connectionFactory.setPassword("123");
-            Connection connection = connectionFactory.newConnection();
-            return connection;
+            return connectionFactory.newConnection();
         }catch (Exception e){
             e.printStackTrace();
         }
