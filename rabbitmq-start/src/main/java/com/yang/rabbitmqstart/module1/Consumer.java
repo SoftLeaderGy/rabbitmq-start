@@ -1,6 +1,7 @@
 package com.yang.rabbitmqstart.module1;
 
 import com.rabbitmq.client.*;
+import com.yang.rabbitmqstart.util.RabbitMQUtils;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.scheduling.annotation.Async;
@@ -20,6 +21,7 @@ public class Consumer {
      */
     @SneakyThrows
     public static void main(String[] args) {
+        /*
         // 创建mq连接
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
@@ -28,6 +30,12 @@ public class Consumer {
         connectionFactory.setUsername("msg");
         connectionFactory.setPassword("123");
         Connection connection = connectionFactory.newConnection();
+         */
+        /**
+         * 使用RabbitMQ工具类获取连接对象
+         */
+        Connection connection = RabbitMQUtils.getConnection();
+
         Channel channel = connection.createChannel();
         channel.queueDeclare("hello",false,false,false,null);
 

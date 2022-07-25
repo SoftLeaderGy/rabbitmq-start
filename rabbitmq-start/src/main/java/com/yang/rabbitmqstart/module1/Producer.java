@@ -3,6 +3,7 @@ package com.yang.rabbitmqstart.module1;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.yang.rabbitmqstart.util.RabbitMQUtils;
 import lombok.SneakyThrows;
 import org.junit.Test;
 
@@ -18,6 +19,7 @@ public class Producer {
     @Test
     @SneakyThrows
     public void testSendMsg(){
+        /*
         // 创建连接mq的连接工厂对象
         ConnectionFactory connectionFactory = new ConnectionFactory();
         // 设置连接RabbitMQ的主机地址
@@ -31,7 +33,12 @@ public class Producer {
         connectionFactory.setPassword("123");
         // 通过连接工厂 获取连接对象
         Connection connection = connectionFactory.newConnection();
+         */
 
+        /**
+         * 使用rabbitMQ工具类获取MQ连接对象
+         */
+        Connection connection = RabbitMQUtils.getConnection();
         // 通过连接对象获取连接通道
         Channel channel = connection.createChannel();
         // 连接通道绑定对应的消息队列
@@ -47,10 +54,15 @@ public class Producer {
         // 由于本次的队列模型是生产者直接发送消息给队列，并没有涉及到交换机，所以本次发送消息的 参数一（交换机名称）为空
         channel.basicPublish("","hello",null,"Hello RabbitMQ".getBytes());
 
+        /*
         // 关闭通道
         channel.close();
         // 关闭连接
         connection.close();
-
+         */
+        /**
+         * 使用rabbitMQ工具类获取关闭资源
+         */
+        RabbitMQUtils.closeConAndChanel(connection,channel);
     }
 }
