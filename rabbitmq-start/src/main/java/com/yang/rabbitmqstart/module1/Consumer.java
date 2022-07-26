@@ -37,7 +37,7 @@ public class Consumer {
         Connection connection = RabbitMQUtils.getConnection();
 
         Channel channel = connection.createChannel();
-        channel.queueDeclare("hello",false,false,false,null);
+        channel.queueDeclare("hello",false,false,true,null);
 
         // 消费指定队列中的消息
         // 参数1: 消费那个队列中的消息 （队列名称）

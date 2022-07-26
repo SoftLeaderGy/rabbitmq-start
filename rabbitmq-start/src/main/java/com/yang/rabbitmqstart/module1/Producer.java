@@ -3,6 +3,7 @@ package com.yang.rabbitmqstart.module1;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
 import com.yang.rabbitmqstart.util.RabbitMQUtils;
 import lombok.SneakyThrows;
 import org.junit.Test;
@@ -47,12 +48,20 @@ public class Producer {
         //参数3:  exclusive 是否独占队列  true 独占队列   false  不独占
         //参数4:  autoDelete: 是否在消费完成后自动删除队列  true 自动删除  false 不自动删除
         //参数5:  额外附加参数
-        channel.queueDeclare("hello",false,false,false,null);
+        /**
+         * 设置队列自动删除,只能是在消费着断开连接的时候，且队列中的消息消费没了后 才会自动删除
+         */
+        channel.queueDeclare("hello",false,false,true,null);
 
         //发布消息
         //参数1: 交换机名称 参数2:队列名称  参数3:传递消息额外设置  参数4:消息的具体内容
         // 由于本次的队列模型是生产者直接发送消息给队列，并没有涉及到交换机，所以本次发送消息的 参数一（交换机名称）为空
-        channel.basicPublish("","hello",null,"Hello RabbitMQ".getBytes());
+        /**
+         * MessageProperties.PERSISTENT_TEXT_PLAIN 设置消息持久化
+         * queueDeclare方法中的第二个参数  是可以设置队列持久化。
+         */
+//        channel.basicPublish("","hello", MessageProperties.PERSISTENT_TEXT_PLAIN,"Hello RabbitMQ".getBytes());
+        channel.basicPublish("","hello", null,"Hello RabbitMQ".getBytes());
 
         /*
         // 关闭通道
