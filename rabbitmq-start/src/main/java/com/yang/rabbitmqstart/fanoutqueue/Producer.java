@@ -22,6 +22,7 @@ public class Producer {
         channel.exchangeDeclare("logs","fanout"); // 广播 一条消息会同时被多个消费者消费
 
         // 向名为logs的交换机中发送消息
+        //参数1: 交换机名称 参数2:队列名称  参数3:传递消息额外设置  参数4:消息的具体内容
         channel.basicPublish("logs","",null,"hello fanout queue".getBytes());
 
         // 释放资源
