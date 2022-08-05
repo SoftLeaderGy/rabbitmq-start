@@ -32,17 +32,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<!--暂时去掉amqp-client 依赖，引入了 springboot集成的 spring-boot-starter-amqp 依赖 ，如果两个依赖同时存在的话 会报错 -->
 <!--		引入rabbitmq依赖-->
-		<dependency>
-			<groupId>com.rabbitmq</groupId>
-			<artifactId>amqp-client</artifactId>
-			<version>5.7.2</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.rabbitmq</groupId>-->
+<!--			<artifactId>amqp-client</artifactId>-->
+<!--			<version>5.7.2</version>-->
+<!--		</dependency>-->
 <!--		添加测试相关依赖-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+<!--		引入rabbitmq相关springboot 依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 	</dependencies>
 
