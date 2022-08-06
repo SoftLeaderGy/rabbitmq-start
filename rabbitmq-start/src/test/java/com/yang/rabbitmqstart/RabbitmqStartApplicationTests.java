@@ -22,4 +22,10 @@ class RabbitmqStartApplicationTests {
 		// 参数一：路由键（队列名称） 参数二：发送的消息
 		rabbitTemplate.convertAndSend("hello","hello world");
 	}
+	@Test
+	void testWork(){
+		for (int i = 0; i < 10; i++) {
+			rabbitTemplate.convertAndSend("work","work 模型" + i);
+		}
+	}
 }
