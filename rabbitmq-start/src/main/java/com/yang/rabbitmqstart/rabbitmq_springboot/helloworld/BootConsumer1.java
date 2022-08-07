@@ -1,4 +1,4 @@
-package com.yang.rabbitmqstart.rabbitmq_springboot;
+package com.yang.rabbitmqstart.rabbitmq_springboot.helloworld;
 
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
