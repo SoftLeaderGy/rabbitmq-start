@@ -15,6 +15,8 @@ class RabbitmqStartApplicationTests {
 	// rabbitmq集成springboot后，我们操作rabbitmq时，直接注入RabbitTemplate 即可
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
+
+	// hello world
 	@Test
 	void contextLoads() {
 		// 通过rabbitTemplate 里的 convertAndSend 方法发送消息
@@ -22,10 +24,17 @@ class RabbitmqStartApplicationTests {
 		// 参数一：路由键（队列名称） 参数二：发送的消息
 		rabbitTemplate.convertAndSend("hello","hello world");
 	}
+	// work
 	@Test
 	void testWork(){
 		for (int i = 0; i < 10; i++) {
 			rabbitTemplate.convertAndSend("work","work 模型" + i);
 		}
+	}
+
+	// fanout
+	@Test
+	void testFanout(){
+		rabbitTemplate.convertAndSend("logs","","fanout模型");
 	}
 }
