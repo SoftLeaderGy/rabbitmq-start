@@ -38,6 +38,7 @@ class RabbitmqStartApplicationTests {
 		rabbitTemplate.convertAndSend("logs","","fanout模型");
 	}
 
+	// direct
 	@Test
 	void testRoute(){
 		rabbitTemplate.convertAndSend("directs","error","route模型");
