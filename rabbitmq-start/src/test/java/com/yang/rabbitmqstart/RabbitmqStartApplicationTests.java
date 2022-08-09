@@ -43,4 +43,9 @@ class RabbitmqStartApplicationTests {
 	void testRoute(){
 		rabbitTemplate.convertAndSend("directs","error","route模型");
 	}
+
+	@Test
+	void testTopic(){
+		rabbitTemplate.convertAndSend("topics","order","topic模型");
+	}
 }
